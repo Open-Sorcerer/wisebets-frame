@@ -36,29 +36,6 @@ export async function POST(
       ? parseEther(frameMessage.inputText?.toString() ?? "0.0001")
       : parseUnits(frameMessage.inputText?.toString() ?? "1", 6);
 
-  const publicClient = createPublicClient({
-    chain: baseSepolia,
-    transport: http(),
-  });
-
-  const account = privateKeyToAccount(process.env.PRIVATE_KEY as `0x${string}`);
-
-  const { result } = await publicClient.simulateContract({
-    address: opinionTradingContractAddress,
-    abi: opinionTradingABI,
-    functionName: "vote",
-    args: [
-      Number(id),
-      Number(option),
-      currency === "usdc" ? amt : 0,
-      currency === "eth" ? amt : 0,
-    ],
-    value: amt,
-    account,
-  });
-
-  console.log("result", result);
-
   const calldata = encodeFunctionData({
     abi: opinionTradingABI,
     functionName: "vote",
@@ -77,7 +54,7 @@ export async function POST(
       abi: opinionTradingABI as Abi,
       to: opinionTradingContractAddress,
       data: calldata,
-      value: amt.toString(),
+      value: currency === "eth" ? amt.toString() : "0",
     },
   });
 }
