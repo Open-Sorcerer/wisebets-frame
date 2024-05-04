@@ -9,7 +9,7 @@ const handleRequest = frames(async (ctx) => {
       </div>
     ),
     buttons: [
-      <Button action='post' target='/bridge'>
+      <Button action='post' target={`${process.env.HOST_URL}/bridge`}>
         Bridge
       </Button>,
     ],

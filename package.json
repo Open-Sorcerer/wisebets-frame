@@ -18,7 +18,7 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "dev": "concurrently \"next dev\" \"frames --url http://localhost:3000\"",
+    "dev": "next dev",
     "start": "next start",
     "build": "next build",
     "lint": "next lint"
