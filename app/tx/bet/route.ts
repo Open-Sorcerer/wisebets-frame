@@ -32,27 +32,7 @@ export async function POST(
   const id = searchParams.get("id");
   const option = searchParams.get("option");
 
-  console.log("id", id);
-  console.log("option", option);
-
   const amt = parseEther(frameMessage.inputText?.toString() ?? "0.0001");
-
-  const publicClient = createPublicClient({
-    chain: baseSepolia,
-    transport: http(),
-  });
-
-  const account = privateKeyToAccount(process.env.PRIVATE_KEY as `0x${string}`);
-
-  const { result } = await publicClient.simulateContract({
-    address: opinionTradingContractAddress,
-    abi: opinionTradingABI,
-    functionName: "vote",
-    args: [Number(id), Number(option), 0, amt],
-    account,
-  });
-
-  console.log("result", result);
 
   const calldata = encodeFunctionData({
     abi: opinionTradingABI,
@@ -67,6 +47,7 @@ export async function POST(
       abi: opinionTradingABI as Abi,
       to: opinionTradingContractAddress,
       data: calldata,
+      value: amt.toString(),
     },
   });
 }

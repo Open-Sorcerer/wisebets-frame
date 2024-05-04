@@ -4,15 +4,15 @@ import { frames } from "../../frames/frames";
 const handleRequest = frames(async (ctx) => {
   return {
     image: (
-      <div tw='flex items-center text-6xl justify-center w-full h-full bg-gray-200'>
+      <div tw='flex items-center text-6xl justify-center w-full h-full text-[#efffb7] bg-[#141414]'>
         USDC is approved successfully
       </div>
     ),
     buttons: [
       <Button
         action='tx'
-        target={`${process.env.HOST_URL}/tx`}
-        post_url={`${process.env.HOST_URL}/tx-success`}
+        target={`${process.env.HOST_URL}/tx/bridge`}
+        post_url={`${process.env.HOST_URL}/tx-success/bridge`}
       >
         Bridge USDC
       </Button>,

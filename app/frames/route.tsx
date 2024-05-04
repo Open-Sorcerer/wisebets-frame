@@ -4,7 +4,7 @@ import { frames } from "../frames/frames";
 const handleRequest = frames(async (ctx) => {
   return {
     image: (
-      <div tw='flex items-center text-6xl justify-center w-full h-full bg-gray-100'>
+      <div tw='flex items-center text-6xl justify-center w-full h-full text-[#efffb7] bg-[#141414]'>
         Select your chain
       </div>
     ),
