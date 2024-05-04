@@ -2,8 +2,8 @@ import { Button } from "frames.js/next";
 import { frames } from "@/app/frames/frames";
 import { createPublicClient, getContract, http } from "viem";
 import { baseSepolia } from "viem/chains";
-import { opinionTradingContractAddress } from "@/utils/constants";
-import { opinionTradingABI } from "@/utils/abi";
+import { baseUSDC, opinionTradingContractAddress } from "@/utils/constants";
+import { USDCABI, opinionTradingABI } from "@/utils/abi";
 
 const handleRequest = frames(async (ctx) => {
   const { searchParams } = new URL(ctx.url);
@@ -41,34 +41,44 @@ const handleRequest = frames(async (ctx) => {
 
   return {
     image: (
-      <div tw='flex items-center text-6xl justify-center w-full h-full text-[#efffb7] bg-[#141414]'>
+      <div
+        tw='flex items-center text-6xl justify-center w-full h-full text-lime-200'
+        style={{
+          backgroundImage: `url('${process.env.HOST_URL}/frame.png')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         {proposal.description}
       </div>
     ),
     buttons: [
       <Button
         action='tx'
-        target={`${process.env.HOST_URL}/tx/bet?option=1&id=${id}`}
+        target={`${process.env.HOST_URL}/tx/bet?option=1&id=${id}&currency=usdc`}
         post_url={`${process.env.HOST_URL}/tx-success/bet?option=1`}
       >
-        {`Bet on ${proposal.option1}`}
+        {proposal.option1}
       </Button>,
       <Button
         action='tx'
-        target={`${process.env.HOST_URL}/tx/bet?option=2&id=${id}`}
+        target={`${process.env.HOST_URL}/tx/bet?option=2&id=${id}&currency=usdc`}
         post_url={`${process.env.HOST_URL}/tx-success/bet?option=2`}
       >
-        {`Bet on ${proposal.option2}`}
+        {proposal.option2}
       </Button>,
       <Button
         action='tx'
-        target={`${process.env.HOST_URL}/tx/approve`}
-        post_url={`${process.env.HOST_URL}/tx-success/approve`}
+        target={`${process.env.HOST_URL}/tx/approve?address=${opinionTradingContractAddress}`}
+        post_url={`${process.env.HOST_URL}/bet/usdc?id=${id}`}
       >
-        Bet USDC
+        Approve
+      </Button>,
+      <Button action='link' target={"https://opinion-swap.vercel.app/onramp"}>
+        Buy
       </Button>,
     ],
-    textInput: "Enter your bet in ETH",
+    textInput: "Enter your bet in USDC",
   };
 });
 

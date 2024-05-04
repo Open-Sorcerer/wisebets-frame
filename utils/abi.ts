@@ -1,118 +1,5 @@
 export const ccipBridgeABI = [
   {
-    inputs: [],
-    name: "acceptOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint64",
-        name: "_destinationChainSelector",
-        type: "uint64",
-      },
-      {
-        internalType: "bool",
-        name: "allowed",
-        type: "bool",
-      },
-    ],
-    name: "allowlistDestinationChain",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_sender",
-        type: "address",
-      },
-      {
-        internalType: "bool",
-        name: "allowed",
-        type: "bool",
-      },
-    ],
-    name: "allowlistSender",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint64",
-        name: "_sourceChainSelector",
-        type: "uint64",
-      },
-      {
-        internalType: "bool",
-        name: "allowed",
-        type: "bool",
-      },
-    ],
-    name: "allowlistSourceChain",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        components: [
-          {
-            internalType: "bytes32",
-            name: "messageId",
-            type: "bytes32",
-          },
-          {
-            internalType: "uint64",
-            name: "sourceChainSelector",
-            type: "uint64",
-          },
-          {
-            internalType: "bytes",
-            name: "sender",
-            type: "bytes",
-          },
-          {
-            internalType: "bytes",
-            name: "data",
-            type: "bytes",
-          },
-          {
-            components: [
-              {
-                internalType: "address",
-                name: "token",
-                type: "address",
-              },
-              {
-                internalType: "uint256",
-                name: "amount",
-                type: "uint256",
-              },
-            ],
-            internalType: "struct Client.EVMTokenAmount[]",
-            name: "destTokenAmounts",
-            type: "tuple[]",
-          },
-        ],
-        internalType: "struct Client.Any2EVMMessage",
-        name: "message",
-        type: "tuple",
-      },
-    ],
-    name: "ccipReceive",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
     inputs: [
       {
         internalType: "address",
@@ -356,41 +243,9 @@ export const ccipBridgeABI = [
     type: "event",
   },
   {
-    inputs: [
-      {
-        internalType: "uint64",
-        name: "_destinationChainSelector",
-        type: "uint64",
-      },
-      {
-        internalType: "address",
-        name: "_receiver",
-        type: "address",
-      },
-      {
-        internalType: "string",
-        name: "_text",
-        type: "string",
-      },
-      {
-        internalType: "address",
-        name: "_token",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
-    ],
-    name: "sendMessagePayLINK",
-    outputs: [
-      {
-        internalType: "bytes32",
-        name: "messageId",
-        type: "bytes32",
-      },
-    ],
+    inputs: [],
+    name: "acceptOwnership",
+    outputs: [],
     stateMutability: "nonpayable",
     type: "function",
   },
@@ -402,46 +257,12 @@ export const ccipBridgeABI = [
         type: "uint64",
       },
       {
-        internalType: "address",
-        name: "_receiver",
-        type: "address",
-      },
-      {
-        internalType: "string",
-        name: "_text",
-        type: "string",
-      },
-      {
-        internalType: "address",
-        name: "_token",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
+        internalType: "bool",
+        name: "allowed",
+        type: "bool",
       },
     ],
-    name: "sendMessagePayNative",
-    outputs: [
-      {
-        internalType: "bytes32",
-        name: "messageId",
-        type: "bytes32",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "to",
-        type: "address",
-      },
-    ],
-    name: "transferOwnership",
+    name: "allowlistDestinationChain",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -450,11 +271,16 @@ export const ccipBridgeABI = [
     inputs: [
       {
         internalType: "address",
-        name: "_beneficiary",
+        name: "_sender",
         type: "address",
       },
+      {
+        internalType: "bool",
+        name: "allowed",
+        type: "bool",
+      },
     ],
-    name: "withdraw",
+    name: "allowlistSender",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -462,24 +288,20 @@ export const ccipBridgeABI = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "_beneficiary",
-        type: "address",
+        internalType: "uint64",
+        name: "_sourceChainSelector",
+        type: "uint64",
       },
       {
-        internalType: "address",
-        name: "_token",
-        type: "address",
+        internalType: "bool",
+        name: "allowed",
+        type: "bool",
       },
     ],
-    name: "withdrawToken",
+    name: "allowlistSourceChain",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
-  },
-  {
-    stateMutability: "payable",
-    type: "receive",
   },
   {
     inputs: [
@@ -539,6 +361,58 @@ export const ccipBridgeABI = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        components: [
+          {
+            internalType: "bytes32",
+            name: "messageId",
+            type: "bytes32",
+          },
+          {
+            internalType: "uint64",
+            name: "sourceChainSelector",
+            type: "uint64",
+          },
+          {
+            internalType: "bytes",
+            name: "sender",
+            type: "bytes",
+          },
+          {
+            internalType: "bytes",
+            name: "data",
+            type: "bytes",
+          },
+          {
+            components: [
+              {
+                internalType: "address",
+                name: "token",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "amount",
+                type: "uint256",
+              },
+            ],
+            internalType: "struct Client.EVMTokenAmount[]",
+            name: "destTokenAmounts",
+            type: "tuple[]",
+          },
+        ],
+        internalType: "struct Client.Any2EVMMessage",
+        name: "message",
+        type: "tuple",
+      },
+    ],
+    name: "ccipReceive",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "getLastReceivedMessageDetails",
     outputs: [
@@ -595,6 +469,45 @@ export const ccipBridgeABI = [
   {
     inputs: [
       {
+        internalType: "uint64",
+        name: "_destinationChainSelector",
+        type: "uint64",
+      },
+      {
+        internalType: "address",
+        name: "_receiver",
+        type: "address",
+      },
+      {
+        internalType: "string",
+        name: "_text",
+        type: "string",
+      },
+      {
+        internalType: "address",
+        name: "_token",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "_amount",
+        type: "uint256",
+      },
+    ],
+    name: "sendMessagePayLINK",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "messageId",
+        type: "bytes32",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "bytes4",
         name: "interfaceId",
         type: "bytes4",
@@ -610,6 +523,54 @@ export const ccipBridgeABI = [
     ],
     stateMutability: "pure",
     type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+    ],
+    name: "transferOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_beneficiary",
+        type: "address",
+      },
+    ],
+    name: "withdraw",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_beneficiary",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_token",
+        type: "address",
+      },
+    ],
+    name: "withdrawToken",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    stateMutability: "payable",
+    type: "receive",
   },
 ];
 
@@ -638,7 +599,7 @@ export const USDCABI = [
     type: "function",
   },
   {
-    constant: true,
+    constant: false,
     inputs: [
       {
         name: "owner",

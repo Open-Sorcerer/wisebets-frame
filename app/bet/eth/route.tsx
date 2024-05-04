@@ -41,31 +41,36 @@ const handleRequest = frames(async (ctx) => {
 
   return {
     image: (
-      <div tw='flex flex-col items-center justify-center text-[#efffb7] bg-[#141414] w-full h-full'>
+      <div
+        tw='flex flex-col items-center justify-center text-lime-200 w-full h-full'
+        style={{
+          backgroundImage: `url('${process.env.HOST_URL}/frame.png')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <span tw='text-6xl'>{proposal.description}</span>
-        <span tw='text-2xl mt-4'>Verify with World ID to get 100% of your win</span>
+        <span tw='text-2xl mt-4'>
+          Verify with World ID to get 100% of your win
+        </span>
       </div>
     ),
     buttons: [
       <Button
         action='tx'
-        target={`${process.env.HOST_URL}/tx/bet?option=1&id=${id}`}
+        target={`${process.env.HOST_URL}/tx/bet?option=1&id=${id}&currency=eth`}
         post_url={`${process.env.HOST_URL}/tx-success/bet?option=1`}
       >
         {`Bet on ${proposal.option1}`}
       </Button>,
       <Button
         action='tx'
-        target={`${process.env.HOST_URL}/tx/bet?option=2&id=${id}`}
+        target={`${process.env.HOST_URL}/tx/bet?option=2&id=${id}&currency=eth`}
         post_url={`${process.env.HOST_URL}/tx-success/bet?option=2`}
       >
         {`Bet on ${proposal.option2}`}
       </Button>,
-      <Button
-        action='tx'
-        target={`${process.env.HOST_URL}/tx/approve`}
-        post_url={`${process.env.HOST_URL}/tx-success/approve`}
-      >
+      <Button action='link' target={"https://opinion-swap.vercel.com/trade"}>
         World ID
       </Button>,
     ],

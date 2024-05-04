@@ -1,9 +1,5 @@
-import { ccipBridgeABI, opinionTradingABI } from "@/utils/abi";
-import {
-  baseUSDC,
-  ccipBridgeBaseSepolia,
-  opinionTradingContractAddress,
-} from "@/utils/constants";
+import { opinionTradingABI } from "@/utils/abi";
+import { opinionTradingContractAddress } from "@/utils/constants";
 import { TransactionTargetResponse, getFrameMessage } from "frames.js";
 import { NextRequest, NextResponse } from "next/server";
 import {
@@ -31,13 +27,47 @@ export async function POST(
   const { searchParams } = new URL(req.url);
   const id = searchParams.get("id");
   const option = searchParams.get("option");
+  const currency = searchParams.get("currency");
 
-  const amt = parseEther(frameMessage.inputText?.toString() ?? "0.0001");
+  console.log("currency", currency);
+
+  const amt =
+    currency === "eth"
+      ? parseEther(frameMessage.inputText?.toString() ?? "0.0001")
+      : parseUnits(frameMessage.inputText?.toString() ?? "1", 6);
+
+  const publicClient = createPublicClient({
+    chain: baseSepolia,
+    transport: http(),
+  });
+
+  const account = privateKeyToAccount(process.env.PRIVATE_KEY as `0x${string}`);
+
+  const { result } = await publicClient.simulateContract({
+    address: opinionTradingContractAddress,
+    abi: opinionTradingABI,
+    functionName: "vote",
+    args: [
+      Number(id),
+      Number(option),
+      currency === "usdc" ? amt : 0,
+      currency === "eth" ? amt : 0,
+    ],
+    value: amt,
+    account,
+  });
+
+  console.log("result", result);
 
   const calldata = encodeFunctionData({
     abi: opinionTradingABI,
     functionName: "vote",
-    args: [Number(id), Number(option), 0, amt],
+    args: [
+      Number(id),
+      Number(option),
+      currency === "usdc" ? amt : 0,
+      currency === "eth" ? amt : 0,
+    ],
   });
 
   return NextResponse.json({

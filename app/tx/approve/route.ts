@@ -10,6 +10,9 @@ export async function POST(
 ): Promise<NextResponse<TransactionTargetResponse>> {
   const json = await req.json();
 
+  const { searchParams } = new URL(req.url);
+  const address = searchParams.get("address");
+
   const frameMessage = await getFrameMessage(json);
 
   if (!frameMessage) {
@@ -21,7 +24,7 @@ export async function POST(
   const calldata = encodeFunctionData({
     abi: USDCABI,
     functionName: "approve",
-    args: [ccipBridgeBaseSepolia, amt],
+    args: [address, amt],
   });
 
   return NextResponse.json({
