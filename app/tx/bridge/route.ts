@@ -2,7 +2,14 @@ import { ccipBridgeABI } from "@/utils/abi";
 import { baseUSDC, ccipBridgeBaseSepolia } from "@/utils/constants";
 import { TransactionTargetResponse, getFrameMessage } from "frames.js";
 import { NextRequest, NextResponse } from "next/server";
-import { Abi, encodeFunctionData, parseUnits } from "viem";
+import {
+  Abi,
+  createPublicClient,
+  encodeFunctionData,
+  http,
+  parseUnits,
+} from "viem";
+import { privateKeyToAccount } from "viem/accounts";
 import { baseSepolia } from "viem/chains";
 
 export async function POST(

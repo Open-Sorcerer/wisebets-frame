@@ -51,7 +51,7 @@ const handleRequest = frames(async (ctx) => {
       >
         <span tw='text-6xl'>{proposal.description}</span>
         <span tw='text-2xl mt-4'>
-          Verify with World ID to get 100% of your win
+          Verify with World ID to get 100% of your rewards
         </span>
       </div>
     ),

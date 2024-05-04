@@ -19,6 +19,9 @@ const handleRequest = frames(async (ctx) => {
       <Button action='post' target={`${process.env.HOST_URL}/bridge`}>
         Bridge again
       </Button>,
+      <Button action='link' target={`https://ccip.chain.link`}>
+        Check on CCIP
+      </Button>,
     ],
   };
 });

@@ -42,14 +42,17 @@ const handleRequest = frames(async (ctx) => {
   return {
     image: (
       <div
-        tw='flex items-center text-6xl justify-center w-full h-full text-lime-200'
+        tw='flex flex-col items-center justify-center text-lime-200 w-full h-full'
         style={{
           backgroundImage: `url('${process.env.HOST_URL}/frame.png')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        {proposal.description}
+        <span tw='text-6xl'>{proposal.description}</span>
+        <span tw='text-2xl mt-4'>
+          Verify with World ID to get 100% of your rewards
+        </span>
       </div>
     ),
     buttons: [
