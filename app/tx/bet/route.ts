@@ -1,5 +1,9 @@
-import { ccipBridgeABI } from "@/utils/abi";
-import { baseUSDC, ccipBridgeBaseSepolia } from "@/utils/constants";
+import { ccipBridgeABI, opinionTradingABI } from "@/utils/abi";
+import {
+  baseUSDC,
+  ccipBridgeBaseSepolia,
+  opinionTradingContractAddress,
+} from "@/utils/constants";
 import { TransactionTargetResponse, getFrameMessage } from "frames.js";
 import { NextRequest, NextResponse } from "next/server";
 import {
@@ -7,6 +11,7 @@ import {
   createPublicClient,
   encodeFunctionData,
   http,
+  parseEther,
   parseUnits,
 } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
@@ -23,7 +28,14 @@ export async function POST(
     throw new Error("No frame message");
   }
 
-  const amt = parseUnits(frameMessage.inputText?.toString() ?? "1", 6);
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get("id");
+  const option = searchParams.get("option");
+
+  console.log("id", id);
+  console.log("option", option);
+
+  const amt = parseEther(frameMessage.inputText?.toString() ?? "0.0001");
 
   const publicClient = createPublicClient({
     chain: baseSepolia,
@@ -33,41 +45,27 @@ export async function POST(
   const account = privateKeyToAccount(process.env.PRIVATE_KEY as `0x${string}`);
 
   const { result } = await publicClient.simulateContract({
-    address: ccipBridgeBaseSepolia,
-    abi: ccipBridgeABI,
-    functionName: "sendMessagePayLINK",
-    args: [
-      BigInt("5224473277236331295"),
-      frameMessage.connectedAddress ??
-        "0x1c4C98d2EAd474876a9E84e2Ba8ff226cc9a161c",
-      "Sending USDC",
-      baseUSDC,
-      amt,
-    ],
+    address: opinionTradingContractAddress,
+    abi: opinionTradingABI,
+    functionName: "vote",
+    args: [Number(id), Number(option), 0, amt],
     account,
   });
 
   console.log("result", result);
 
   const calldata = encodeFunctionData({
-    abi: ccipBridgeABI,
-    functionName: "sendMessagePayLINK",
-    args: [
-      BigInt("5224473277236331295"),
-      frameMessage.connectedAddress ??
-        "0x1c4C98d2EAd474876a9E84e2Ba8ff226cc9a161c",
-      "Sending USDC",
-      baseUSDC,
-      amt,
-    ],
+    abi: opinionTradingABI,
+    functionName: "vote",
+    args: [Number(id), Number(option), 0, amt],
   });
 
   return NextResponse.json({
     chainId: `eip155:${baseSepolia.id}`,
     method: "eth_sendTransaction",
     params: {
-      abi: ccipBridgeABI as Abi,
-      to: ccipBridgeBaseSepolia,
+      abi: opinionTradingABI as Abi,
+      to: opinionTradingContractAddress,
       data: calldata,
     },
   });

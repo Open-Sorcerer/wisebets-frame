@@ -3,7 +3,7 @@ export const ccipBridgeBaseSepolia =
 
 export const ccipBridgeOPSepolia = "0x039A8561E235cF960bfed66AAD74441E3594aBb4";
 
-export const opnionTradingBaseSepolia =
+export const opinionTradingContractAddress =
   "0x1d748f5b76a62Cf3847E6c8716d6a9cDeb560A9E";
 
 export const baseUSDC = "0x036CbD53842c5426634e7929541eC2318f3dCF7e";
