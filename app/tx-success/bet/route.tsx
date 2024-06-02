@@ -12,7 +12,7 @@ const handleRequest = frames(async (ctx) => {
     buttons: [
       <Button
         action='link'
-        target={`https://wisebets-ccip.vercel.app/trade?chainId=${baseSepolia.id}`}
+        target={`https://wise-bets.vercel.app/trade?chainId=${baseSepolia.id}`}
       >
         Check more bets
       </Button>,
