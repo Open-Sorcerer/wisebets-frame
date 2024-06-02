@@ -1,6 +1,5 @@
 import { Button } from "frames.js/next";
 import { frames } from "../../frames/frames";
-import { baseSepolia } from "viem/chains";
 
 const handleRequest = frames(async (ctx) => {
   return {
@@ -10,10 +9,7 @@ const handleRequest = frames(async (ctx) => {
       </div>
     ),
     buttons: [
-      <Button
-        action='link'
-        target={`https://wise-bets.vercel.app/trade?chainId=${baseSepolia.id}`}
-      >
+      <Button action='link' target={`https://wise-bets.vercel.app/trade`}>
         Check more bets
       </Button>,
     ],
