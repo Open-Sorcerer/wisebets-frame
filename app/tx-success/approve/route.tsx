@@ -5,12 +5,7 @@ const handleRequest = frames(async (ctx) => {
   return {
     image: (
       <div
-        tw='flex items-center text-6xl justify-center w-full h-full text-lime-200'
-        style={{
-          backgroundImage: `url('${process.env.HOST_URL}/frame.png')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        tw='flex items-center text-6xl justify-center w-full h-full bg-[#ffe1b1] text-violet-800'
       >
         USDC is approved successfully
       </div>

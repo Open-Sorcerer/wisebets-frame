@@ -5,15 +5,8 @@ import { ccipBridgeBaseSepolia } from "@/utils/constants";
 const handleRequest = frames(async (ctx) => {
   return {
     image: (
-      <div
-        tw='flex flex-col items-center justify-center text-lime-200 w-full h-full'
-        style={{
-          backgroundImage: `url('${process.env.HOST_URL}/frame.png')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <span tw='text-6xl'>Bridge USDC to OP</span>
+      <div tw='flex flex-col items-center justify-center w-full h-full bg-[#ffe1b1] text-violet-800'>
+        <span tw='text-6xl'>Bridge USDC to Avalanche Fuji</span>
         <span tw='text-2xl mt-4'>Powered by CCIP</span>
       </div>
     ),

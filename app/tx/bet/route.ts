@@ -4,13 +4,10 @@ import { TransactionTargetResponse, getFrameMessage } from "frames.js";
 import { NextRequest, NextResponse } from "next/server";
 import {
   Abi,
-  createPublicClient,
   encodeFunctionData,
-  http,
   parseEther,
   parseUnits,
 } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
 import { baseSepolia } from "viem/chains";
 
 export async function POST(

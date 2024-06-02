@@ -41,18 +41,8 @@ const handleRequest = frames(async (ctx) => {
 
   return {
     image: (
-      <div
-        tw='flex flex-col items-center justify-center text-lime-200 w-full h-full'
-        style={{
-          backgroundImage: `url('${process.env.HOST_URL}/frame.png')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
+      <div tw='flex flex-col items-center justify-center w-full h-full bg-[#ffe1b1] text-violet-800'>
         <span tw='text-6xl'>{proposal.description}</span>
-        <span tw='text-2xl mt-4'>
-          Verify with World ID to get 100% of your rewards
-        </span>
       </div>
     ),
     buttons: [
@@ -76,9 +66,6 @@ const handleRequest = frames(async (ctx) => {
         post_url={`${process.env.HOST_URL}/bet/usdc?id=${id}`}
       >
         Approve
-      </Button>,
-      <Button action='link' target={"https://opinion-swap.vercel.app/onramp"}>
-        Buy
       </Button>,
     ],
     textInput: "Enter your bet in USDC",
